@@ -1,5 +1,8 @@
 import { Roboto } from 'next/font/google';
-import { getCssText } from '../styles'
+import { getCssText } from '@/styles/index';
+import { globalStyles } from '@/styles/global';
+import { Header, Container } from '@/styles/app/app';
+import logoImg from '../assets/logo.svg'
 
 const roboto = Roboto({
   weight: ['400', '700'],
@@ -17,13 +20,22 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
-}) {
+}) { 
   return (
     <html lang="pt-br">
       <head>
-        <style id="stitches" dangerouslySetInnerHTML={{__html: getCssText()}} />
+        <style id="stitches" dangerouslySetInnerHTML={{__html: `${getCssText()}${globalStyles()}`}} />
       </head>
-      <body className={roboto.className}>{children}</body>
+      <body className={roboto.className}>
+        <Container>
+
+            <Header>
+              <img src={logoImg.src} alt="" />
+            </Header>
+            {children}  
+
+        </Container>
+      </body>
     </html>
   )
 }
